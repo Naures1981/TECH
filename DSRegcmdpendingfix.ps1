@@ -15,6 +15,7 @@ $Dsregcmd = New-Object PSObject ; Dsregcmd /status | Where {$_ -match ' : '}|For
 if ($dsregcmd.DeviceAuthStatus -eq "FAILED. Device is either disabled or deleted" -or $dsregcmd.DeviceAuthStatus -eq "FAILED") 
 {
  dsregcmd /leave
+ Enable-ScheduledTask -TaskName "Microsoft\Windows\Workplace Join\Automatic-Device-Join"
  schtasks /Run /TN "Microsoft\Windows\Workplace Join\Automatic-Device-Join"
 }
 
